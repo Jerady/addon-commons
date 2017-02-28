@@ -1,11 +1,20 @@
 apply plugin: 'java'
 apply plugin: 'maven-publish'
-
+apply plugin: 'com.jfrog.bintray'
 
 group = 'de.jensd'
 version '0.0.7'
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+    }
+}
 
 repositories {
     mavenCentral()
@@ -20,6 +29,27 @@ task javadocJar(type: Jar) {
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
     classifier "sources"
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    pkg {
+        repo = 'maven'
+        name = 'addon-commons'
+        userOrg = 'jerady'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/Jerady/addon-commons.git'
+        publications = ['mavenJava']
+        websiteUrl = 'https://github.com/Jerady/addon-commons'
+        issueTrackerUrl = 'https://github.com/Jerady/addon-commons/issues'
+        publicDownloadNumbers = true
+        version {
+            name = '0.0.7'
+            desc = 'addon-commons 0.0.7'
+            vcsTag = 'addon-commons-0.0.7'
+        }
+    }
 }
 
 publishing {
@@ -44,5 +74,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.3'
+    gradleVersion = '3.4'
 }
