@@ -19,7 +19,9 @@ buildscript {
 repositories {
     mavenCentral()
     mavenLocal()
+    jcenter()
 }
+
 
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
