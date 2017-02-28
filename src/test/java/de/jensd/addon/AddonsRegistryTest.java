@@ -12,9 +12,9 @@ import java.net.URL;
  *
  * @author Jens Deters
  */
-public class ExtensionsRegistryTest {
+public class AddonsRegistryTest {
 
-    public ExtensionsRegistryTest() {
+    public AddonsRegistryTest() {
     }
 
     @Test
@@ -40,7 +40,7 @@ public class ExtensionsRegistryTest {
     
     @Test
     public void testLoadExtensionsFromJar() {
-        String lookupPath = "/Users/jens/NetBeansProjects/extensions-commons/build/resources/test";
+        String lookupPath = "build/resources/test";
         System.setProperty(AddOnRegistryServiceLoader.ADDON_LOOKUP_PATH_PROPERTY_NAME, lookupPath);
         AddOnRegistryServiceLoader extensionRegistry = new AddOnRegistryServiceLoader();
         List<URL> addOnUrls = extensionRegistry.lookupAddOnUrls();
