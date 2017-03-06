@@ -3,7 +3,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
 group = 'de.jensd'
-version '0.0.7'
+version '1.0.0'
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
@@ -47,9 +47,9 @@ bintray {
         issueTrackerUrl = 'https://github.com/Jerady/addon-commons/issues'
         publicDownloadNumbers = true
         version {
-            name = '0.0.7'
-            desc = 'addon-commons 0.0.7'
-            vcsTag = 'addon-commons-0.0.7'
+            name = '$version'
+            desc = 'addon-commons $version'
+            vcsTag = 'addon-commons-$version'
         }
     }
 }
