@@ -1,9 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
+apply from: 'deploy.gradle'
 
-group = 'de.jensd'
-version '1.0.0'
+version=artifactVersion
+group=artifactGroupId
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
@@ -37,19 +38,20 @@ bintray {
     user = System.getenv('BINTRAY_USER')
     key = System.getenv('BINTRAY_KEY')
     pkg {
-        repo = 'maven'
-        name = 'addon-commons'
-        userOrg = 'jerady'
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/Jerady/addon-commons.git'
-        publications = ['mavenJava']
-        websiteUrl = 'https://github.com/Jerady/addon-commons'
-        issueTrackerUrl = 'https://github.com/Jerady/addon-commons/issues'
+        repo = "maven"
+        name = artifactId
+        userOrg = artifactUserOrg
+        publications = artifactPublications
+        issueTrackerUrl = artifactIssueTrackerUrl
+        websiteUrl = artifactSiteUrl
+        vcsUrl = artifactGitUrl
+        licenses = artifactLicenses
         publicDownloadNumbers = true
+        publish = true
         version {
-            name = '$version'
-            desc = 'addon-commons $version'
-            vcsTag = 'addon-commons-$version'
+            name = artifactVersion
+            desc =  artifactDesc
+            vcsTag = artifactVcsTag
         }
     }
 }

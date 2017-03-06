@@ -1,0 +1,13 @@
+ext{
+    artifactGroupId = 'de.jensd'
+    artifactId = 'addon-commons'
+    artifactVersion = '1.0.0'
+    artifactSiteUrl = 'https://github.com/Jerady/addon-commons'
+    artifactGitUrl = 'https://github.com/Jerady/addon-commons.git'
+    artifactUserOrg = 'jerady'
+    artifactPublications = ['mavenJava']
+    artifactIssueTrackerUrl = 'https://bitbucket.org/Jerady/fontawesomefx/issues'
+    artifactLicenses = ['Apache-2.0']
+    artifactDesc = '$artifactId $artifactVersion'
+    artifactVcsTag = '$artifactId-$artifactVersion'
+}
