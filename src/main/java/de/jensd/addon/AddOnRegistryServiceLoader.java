@@ -33,12 +33,11 @@ public class AddOnRegistryServiceLoader implements AddOnRegistry {
         addOnLoader.forEach(addOn -> {
             LOGGER.info(String.format("Found add-on of type %s at: %s",
                     addOnClass.getName(),
-                    addOn,
                     addOn.getClass().getProtectionDomain().getCodeSource().getLocation()));
             addOns.add(addOn);
         });
         if (addOns.isEmpty()) {
-            LOGGER.info(String.format("No implementations of type %s found.", addOnClass.getName()));
+            LOGGER.info(String.format("No implementations of type %s found", addOnClass.getName()));
         }
         return addOns;
     }
@@ -53,7 +52,7 @@ public class AddOnRegistryServiceLoader implements AddOnRegistry {
         List<URL> addOnUrlList = new ArrayList<>();
         File[] addOnJars = addOnFolder.listFiles(getAddOnJarFilter());
         if (addOnJars == null || addOnJars.length == 0) {
-            LOGGER.info("Found 0 add-on jars.");
+            LOGGER.info("No add-on jars found");
         } else {
             LOGGER.info(String.format("Found %s add-ons package(s)", addOnJars.length));
             for (File extensionJar : addOnJars) {
