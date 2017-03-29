@@ -24,7 +24,7 @@ public class AddOnRegistryServiceLoader implements AddOnRegistry {
     public static final String ADDON_LOOKUP_PATH_PROPERTY_NAME = "de.jensd.addon.lookupPath";
     public static final String ADDON_FILE_EXTENSION_PROPERTY_NAME = "de.jensd.addon.fileExtension";
     public static final String ADDON_LOOKUP_PATH_DEFAULT = "./addon/";
-    public static final String ADDON_FILE_EXTENSION_DEFAULT = ".addon.jar";
+    public static final String ADDON_FILE_EXTENSION_DEFAULT = ".jar";
 
     @Override
     public <TAddOn extends AddOn> List<TAddOn> getAddOns(Class<TAddOn> addOnClass) {
