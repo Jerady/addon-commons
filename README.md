@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/jerady/maven/addon-commons/images/download.svg) ](https://bintray.com/jerady/maven/addon-commons/_latestVersion)
+
 # Add-on commons
 
 This a small [ServiceLoader](https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html) API based framework to implement add-ons to be provided by external jars.
