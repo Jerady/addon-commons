@@ -1,6 +1,8 @@
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id "com.jfrog.bintray" version "1.8.4"
+}
 apply from: 'deploy.gradle'
 
 version=artifactVersion
@@ -8,24 +10,13 @@ group=artifactGroupId
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
-    }
-}
-
 repositories {
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
     jcenter()
 }
 
-
 task javadocJar(type: Jar) {
-    classifier = 'javadoc'
     from javadoc
 }
 
@@ -71,12 +62,8 @@ publishing {
     }
 }
 dependencies {
-    compile 'org.apache.logging.log4j:log4j-api:2.6'
-    compile 'org.apache.logging.log4j:log4j-core:2.6'
-    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.6'
-    testCompile 'junit:junit:4.10'
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.4'
+    compile 'org.apache.logging.log4j:log4j-api:2.13.0'
+    compile 'org.apache.logging.log4j:log4j-core:2.13.0'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.13.0'
+    testCompile 'junit:junit:4.13'
 }

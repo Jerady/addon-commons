@@ -1,7 +1,7 @@
 ext{
     artifactGroupId = 'de.jensd'
     artifactId = 'addon-commons'
-    artifactVersion = '1.1.0'
+    artifactVersion = '11.0.2'
     artifactSiteUrl = 'https://github.com/Jerady/addon-commons'
     artifactGitUrl = 'https://github.com/Jerady/addon-commons.git'
     artifactUserOrg = 'jerady'
