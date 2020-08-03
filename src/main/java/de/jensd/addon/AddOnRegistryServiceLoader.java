@@ -24,8 +24,6 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * An add-on service loader registry.
@@ -36,7 +34,6 @@ import org.slf4j.LoggerFactory;
  */
 public class AddOnRegistryServiceLoader implements AddOnRegistry {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AddOnRegistryServiceLoader.class.getName());
     public static final String ADDON_LOOKUP_PATH_PROPERTY_NAME = "de.jensd.addon.lookupPath";
     public static final String ADDON_FILE_EXTENSION_PROPERTY_NAME = "de.jensd.addon.fileExtension";
     public static final String ADDON_LOOKUP_PATH_DEFAULT = "./addon/";
@@ -47,13 +44,13 @@ public class AddOnRegistryServiceLoader implements AddOnRegistry {
         ServiceLoader<TAddOn> addOnLoader = ServiceLoader.load(addOnClass, createAddOnClassLoader(lookupAddOnUrls()));
         List<TAddOn> addOns = new ArrayList<>();
         addOnLoader.forEach(addOn -> {
-            LOGGER.info(String.format("Found add-on of type %s at: %s",
+            System.out.println(String.format("Found add-on of type %s at: %s",
                     addOnClass.getName(),
                     addOn.getClass().getProtectionDomain().getCodeSource().getLocation()));
             addOns.add(addOn);
         });
         if (addOns.isEmpty()) {
-            LOGGER.info(String.format("No implementations of type %s found", addOnClass.getName()));
+            System.out.println(String.format("No implementations of type %s found", addOnClass.getName()));
         }
         return addOns;
     }
@@ -64,20 +61,20 @@ public class AddOnRegistryServiceLoader implements AddOnRegistry {
      */
     public List<URL> lookupAddOnUrls() {
         File addOnFolder = new File(getAddOnLookupPath());
-        LOGGER.info(String.format("Add-on folder: %s", addOnFolder.getAbsolutePath()));
+        System.out.println(String.format("Add-on folder: %s", addOnFolder.getAbsolutePath()));
         List<URL> addOnUrlList = new ArrayList<>();
         File[] addOnJars = addOnFolder.listFiles(getAddOnJarFilter());
         if (addOnJars == null || addOnJars.length == 0) {
-            LOGGER.info("No add-on jars found");
+            System.out.println("No add-on jars found");
         } else {
-            LOGGER.info(String.format("Found %s add-ons package(s)", addOnJars.length));
+            System.out.println(String.format("Found %s add-ons package(s)", addOnJars.length));
             for (File extensionJar : addOnJars) {
                 try {
                     URL addOnJarUrl = extensionJar.toURI().toURL();
                     addOnUrlList.add(addOnJarUrl);
-                    LOGGER.info(String.format("Added add-ons package: %s", addOnJarUrl));
+                    System.out.println(String.format("Added add-ons package: %s", addOnJarUrl));
                 } catch (MalformedURLException ex) {
-                    LOGGER.error("ERROR", ex);
+                    ex.printStackTrace();
                 }
             }
         }
