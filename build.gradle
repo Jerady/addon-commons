@@ -1,19 +1,15 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id "com.jfrog.bintray" version "1.8.4"
 }
 apply from: 'deploy.gradle'
 
-version=artifactVersion
-group=artifactGroupId
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
     mavenLocal()
     mavenCentral()
-    jcenter()
 }
 
 task javadocJar(type: Jar) {
@@ -25,45 +21,23 @@ task sourceJar(type: Jar) {
     classifier "sources"
 }
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    pkg {
-        repo = "maven"
-        name = artifactId
-        userOrg = artifactUserOrg
-        publications = artifactPublications
-        issueTrackerUrl = artifactIssueTrackerUrl
-        websiteUrl = artifactSiteUrl
-        vcsUrl = artifactGitUrl
-        licenses = artifactLicenses
-        publicDownloadNumbers = true
-        publish = true
-        version {
-            name = artifactVersion
-            desc =  artifactDesc
-            vcsTag = artifactVcsTag
-        }
-    }
-}
-
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        maven(MavenPublication) {
+            groupId = artifactGroupId
+            version = artifactVersion
             from components.java
             artifact sourceJar {
                 classifier "sources"
             }
-
             artifact javadocJar {
                 classifier "javadoc"
             }
         }
     }
 }
+
 dependencies {
-    compile 'org.apache.logging.log4j:log4j-api:2.13.0'
-    compile 'org.apache.logging.log4j:log4j-core:2.13.0'
-    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.13.0'
-    testCompile 'junit:junit:4.13'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
