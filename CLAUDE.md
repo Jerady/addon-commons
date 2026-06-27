@@ -21,6 +21,11 @@ JDK `java.util.ServiceLoader` SPI mechanism. The published artifact is the main 
 
 Java source/target is 1.8. Tests use JUnit 5 (Jupiter). Gradle wrapper is 7.3.3.
 
+The `build.gradle` `test` task enables `useJUnitPlatform()` — this is **required** for Jupiter
+tests to run. Without it Gradle defaults to the JUnit 4 engine, silently discovers zero tests, and
+still reports `BUILD SUCCESSFUL` (a green build that ran nothing). If a future change drops this
+line, all tests stop executing without any failure being reported.
+
 ### JDK requirement
 
 Gradle 7.3.3 supports JDK 8–17 only. Running on a newer JDK (e.g. 21) fails the build with
