@@ -6,6 +6,7 @@ nb-settings.xml
 settings.xml
 /nbproject/
 .gradle
+gradle.properties
 .nb-gradle
 /build/
 /.idea/
